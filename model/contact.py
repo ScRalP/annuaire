@@ -22,6 +22,9 @@ class Contact():
         self.email = email
         
 
+    def printInfos(self):
+        print(self.firstname)
+
     def toJSON(self):
         return "{"+\
                 "\""+ self.firstname +"\","+\
