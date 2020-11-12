@@ -1,6 +1,3 @@
-import sys
-from PyQt5.QtWidgets import *
-
 #import des classes metier & view
 from view.mainWindow import *
 from model.annuaire import *

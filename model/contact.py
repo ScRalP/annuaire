@@ -1,14 +1,18 @@
 class Contact():
-    def __init__(self, nom, prenom, departement):
+    def __init__(self, nom, email, departement, tel):
         self.nom = nom
-        self.prenom = prenom
-        self.deparement = departement
+        self.email = email
+        self.departement = departement
+        self.tel = tel
 
     def setNom(self, nom):
         self.nom = nom
 
-    def setPrenom(self, prenom):
-        self.prenom = prenom
+    def setPrenom(self, email):
+        self.email = email
 
     def setDepartement(self, departement):
-        self.deparement = departement
+        self.departement = departement
+
+    def setTel(self, tel):
+        self.tel = tel
