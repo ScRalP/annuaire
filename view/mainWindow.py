@@ -1,5 +1,5 @@
-import sys
 from PyQt5.QtWidgets import *
+from view.contactForm import *
 
 class MainWindow(QMainWindow):
     def __init__(self, controller):
@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
         #Actions du actionMenu
         addMenu = QAction("&Ajouter", self)
         addMenu.setShortcut("Ctrl+N")
-        #addMenu.triggered.connect(self.addContact)
+        addMenu.triggered.connect(self.addContact)
         updMenu = QAction("&Editer", self)
         updMenu.setShortcut("Ctrl+E")
         #addMenu.triggered.connect(self.updContact)
@@ -113,3 +113,6 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,2,QTableWidgetItem(contact.email))
 
             i+=1
+
+    def addContact(self):
+        ContactForm(self)

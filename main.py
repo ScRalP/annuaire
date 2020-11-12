@@ -1,4 +1,5 @@
 #import des classes metier & view
+import sys
 from view.mainWindow import *
 from model.annuaire import *
 
