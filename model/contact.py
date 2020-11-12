@@ -16,3 +16,13 @@ class Contact():
 
     def setTel(self, tel):
         self.tel = tel
+
+    def toJSON(self):
+        sRet = "{"+\
+               "\""+ self.nom +"\","+\
+               "\""+ self.email +"\","+\
+               "\""+ self.dep +"\","+\
+               "\""+ self.tel +"\""+\
+               "}"
+
+        return sRet
