@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
 
         #Init de la fenetre
         self.setWindowTitle("Annuaire")
-        self.setGeometry(800,200,1000,650)
+        self.setGeometry(500,200,1000,650)
         #empecher le resize
         self.setFixedSize(self.size())
         self.statusBar().setSizeGripEnabled(False)
@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
     def updateTable(self, stringFilter):
         annuaire = self.controller.getAnnuaire()
         #On vide la table
-        self.table.clear()
+        self.table.setRowCount(0)
         self.table.setColumnCount(5)
         self.table.setHorizontalHeaderLabels(['firstname', 'lastname', 'number', 'departement', 'email'])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
