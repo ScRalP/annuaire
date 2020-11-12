@@ -15,6 +15,7 @@ class Annuaire():
         file = open("contacts.json", "r")
         for contact in json.loads(file.read()):
             self.addContact(Contact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
+            print(contact)
         file.close()
 
     def addContact(self,contact):
@@ -30,9 +31,10 @@ class Annuaire():
     def removeContact(self, contact):
         self.contacts.remove(contact)
 
-    def infoContact(self, index):
-        
-        self.contacts[index].printInfos()
+    def infoContacts(self):
+        for contact in self.contacts:
+            contact.printInfos()
+
     def getLength(self):
         return len(self.contacts)
 
