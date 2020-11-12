@@ -1,28 +1,31 @@
 class Contact():
-    def __init__(self, nom, email, dep, tel):
-        self.nom = nom
+    def __init__(self, firstname, lastname, number, departement, email):
+        self.number = number
+        self.lastname = lastname
+        self.firstname = firstname
         self.email = email
-        self.dep = dep
-        self.tel = tel
+        self.departement = departement
 
-    def setNom(self, nom):
-        self.nom = nom
+    def setNumber(self, number):
+        self.number = number
 
-    def setPrenom(self, email):
+    def setFirstname(self, firstname):
+        self.firstname = firstname
+
+    def setLastname(self, lastname):
+        self.lastname = lastname
+
+    def setDepartement(self, departement):
+        self.departement = departement
+
+    def setEmail(self, email):
         self.email = email
-
-    def setDep(self, dep):
-        self.dep = dep
-
-    def setTel(self, tel):
-        self.tel = tel
 
     def toJSON(self):
-        sRet = "{"+\
-               "\""+ self.nom +"\","+\
-               "\""+ self.email +"\","+\
-               "\""+ self.dep +"\","+\
-               "\""+ self.tel +"\""+\
-               "}"
-
-        return sRet
+        return "{"+\
+                "\""+ self.firstname +"\","+\
+                "\""+ self.lastname +"\","+\
+                "\""+ self.number +"\","+\
+                "\""+ self.dep +"\","+\
+                "\""+ self.email +"\""+\
+                "}"
