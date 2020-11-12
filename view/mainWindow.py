@@ -102,6 +102,9 @@ class MainWindow(QMainWindow):
         self.table.setColumnCount(5)
         self.table.setHorizontalHeaderLabels(['firstname', 'lastname', 'number', 'departement', 'email'])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSortingEnabled(True)
+        self.table.setEditTriggers(QTableWidget.NoEditTriggers)
+
         #On remplis la table
         i = 0
         for contact in annuaire.contacts:
