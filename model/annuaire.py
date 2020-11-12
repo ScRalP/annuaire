@@ -3,12 +3,9 @@ from model.contact import *
 import json
 
 class Annuaire():
-    def __init__(self, controller):
-        #recup du controller
-        self.controller = controller
-        self.contacts = [Contact("Quentin", "Robard", "06 15 15 15 15", "78420", "quentin.robard@gmail.com"),
-                         Contact("Corentin", "Bollaert", "06 12 12 12 12", "16600", "cor_bo@hotmail.fr")]
-        
+    def __init__(self):
+        self.contacts=[]
+
     def saveToJson(self):
         for contact in self.contacts:
             contact.toJSON(self)
