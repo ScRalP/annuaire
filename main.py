@@ -5,9 +5,9 @@ from model.annuaire import *
 app = QApplication(sys.argv)
 
 class Controller():
-    def __init__(self, annuaire, window):
-        self.annuaire = annuaire
-        self.window = window
+    def __init__(self):
+        self.annuaire = Annuaire(self)
+        self.window = MainWindow(self)
 
     def getAnnuaire(self):
         return self.annuaire
@@ -15,7 +15,8 @@ class Controller():
     def getWindow(self):
         return self.window
 
-controller = Controller(Annuaire(), MainWindow())
+
+controller = Controller()
 controller.window.show()
 
 sys.exit(app.exec_())

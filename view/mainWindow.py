@@ -2,8 +2,13 @@ import sys
 from PyQt5.QtWidgets import *
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, controller):
         super(MainWindow, self).__init__()
+
+        #Récupération du controller
+        self.controller = controller
+
+        #Init de la fenetre
         self.setWindowTitle("Annuaire")
         self.setGeometry(800,200,500,650)
         #empecher le resize
@@ -90,7 +95,21 @@ class MainWindow(QMainWindow):
 
         #set central widget
         self.setCentralWidget(window)
+        self.updateTable()
 
     def updateTable(self):
-        for contact in self.annuaire.contacts:
-            print(contact.nom)
+        annuaire = self.controller.getAnnuaire()
+        #On vide la table
+        self.table.clear()
+        #On remplis la table
+        i = 0
+        for contact in annuaire.contacts:
+            self.table.insertRow(i)
+
+            self.table.setItem(i,0,QTableWidgetItem(contact.firstName))
+            self.table.setItem(i,1,QTableWidgetItem(contact.lastName))
+            self.table.setItem(i,2,QTableWidgetItem(contact.email))
+            self.table.setItem(i,3,QTableWidgetItem(contact.dep))
+            self.table.setItem(i,3,QTableWidgetItem(contact.tel))
+
+            i+=1

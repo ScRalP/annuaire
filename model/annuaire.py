@@ -2,7 +2,10 @@
 from model.contact import *
 
 class Annuaire():
-    def __init__(self):
+    def __init__(self, controller):
+        #recup du controller
+        self.controller = controller
+
         #Initialisation d'une liste de base
         self.contacts = [Contact("Robard", "quentin.robard@sfr.fr", "78420", "06 15 15 15 15"), Contact("Bollaert", "cor_bo@hotmail.com", "16600", "06 12 12 12 12")]
 
