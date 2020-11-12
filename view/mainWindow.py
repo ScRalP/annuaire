@@ -31,10 +31,10 @@ class MainWindow(QMainWindow):
         addMenu.triggered.connect(self.addContact)
         updMenu = QAction("&Editer", self)
         updMenu.setShortcut("Ctrl+E")
-        #addMenu.triggered.connect(self.updContact)
+        updMenu.triggered.connect(self.updContact)
         delMenu = QAction("&Supprimer", self)
         delMenu.setShortcut("Ctrl+D")
-        #addMenu.triggered.connect(self.delContact)
+        delMenu.triggered.connect(self.delContact)
 
         #Ajout du menu
         self.statusBar()
@@ -116,4 +116,12 @@ class MainWindow(QMainWindow):
             i+=1
 
     def addContact(self):
-        ContactForm(self)
+        self.dialog = ContactForm(self.controller, "Ajouter un contact")
+        self.dialog.show()
+
+    def updContact(self):
+        self.dialog = ContactForm(self.controller, "Modifier un contact")
+        self.dialog.show()
+
+    def delContact(self):
+        print("del")
