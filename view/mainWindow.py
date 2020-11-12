@@ -56,6 +56,7 @@ class MainWindow(QMainWindow):
         #Creation des composants
         barLabel = QLabel("Rechercher")
         barInput = QLineEdit()
+        barInput.textChanged[str].connect(self.updateFilter)
 
         #Ajout des composants au layout
         barLayout.addWidget(barLabel)
@@ -95,9 +96,9 @@ class MainWindow(QMainWindow):
 
         #set central widget
         self.setCentralWidget(window)
-        self.updateTable()
+        self.updateTable("")
 
-    def updateTable(self):
+    def updateTable(self, stringFilter):
         annuaire = self.controller.getAnnuaire()
         #On vide la table
         self.table.clear()
@@ -106,10 +107,11 @@ class MainWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.table.setSelectionBehavior(QTableView.SelectRows)
 
         #On remplis la table
         i = 0
-        for contact in annuaire.contacts:
+        for contact in annuaire.filteredContacts(stringFilter):
             self.table.insertRow(i)
 
             self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
@@ -130,3 +132,6 @@ class MainWindow(QMainWindow):
 
     def delContact(self):
         print("del")
+
+    def updateFilter(self, stringFilter):
+        self.updateTable(stringFilter)

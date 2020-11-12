@@ -38,3 +38,12 @@ class Contact():
         for c in ".- ":
             self.number = self.number.replace(c, "")
         self.number = self.number.strip()
+
+    def searchByString(self, stringToSearch):
+        if (stringToSearch in str(self.firstname) or
+        stringToSearch in str(self.lastname) or
+        stringToSearch in str(self.number) or
+        stringToSearch in str(self.departement) or
+        stringToSearch in str(self.email)):
+            return True
+        return False

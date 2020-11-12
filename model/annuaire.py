@@ -54,3 +54,12 @@ class Annuaire():
         contactToEdit.setDepartement(departement)
         contactToEdit.setEmail(email)
 
+    def filteredContacts(self, stringToSearch):
+        if (stringToSearch==""):
+            return self.contacts
+        else :
+            contactListToDisplay = []
+            for contact in self.contacts:
+                if (contact.searchByString(stringToSearch)):
+                    contactListToDisplay.append(contact)
+            return contactListToDisplay
