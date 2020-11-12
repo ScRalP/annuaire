@@ -125,8 +125,16 @@ class MainWindow(QMainWindow):
         self.dialog.show()
 
     def updContact(self):
-        self.dialog = ContactForm(self.controller, "Modifier un contact", )
-        self.dialog.show()
+        items = self.table.selectedItems()
+        #On verifie que l'on le cliques pas sur une ligne vide
+        if len(items) > 0:
+            values = []
+            for item in items:
+                values.append(item.text())
+
+            contact = self.controller.getAnnuaire().getContactForNumber(values[2])
+            self.dialog = ContactForm(self.controller, "Modifier un contact", contact)
+            self.dialog.show()
 
     def delContact(self):
         print("del")
