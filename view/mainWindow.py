@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
 
         #Init de la fenetre
         self.setWindowTitle("Annuaire")
-        self.setGeometry(800,200,500,650)
+        self.setGeometry(800,200,1000,650)
         #empecher le resize
         self.setFixedSize(self.size())
         self.statusBar().setSizeGripEnabled(False)
@@ -99,8 +99,8 @@ class MainWindow(QMainWindow):
         annuaire = self.controller.getAnnuaire()
         #On vide la table
         self.table.clear()
-        self.table.setColumnCount(4)
-        self.table.setHorizontalHeaderLabels(['nom', 'prenom', 'departement', 'tel'])
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(['firstname', 'lastname', 'number', 'departement', 'email'])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         #On remplis la table
         i = 0
@@ -109,9 +109,9 @@ class MainWindow(QMainWindow):
 
             self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
             self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
-            self.table.setItem(i,3,QTableWidgetItem(contact.number))
-            self.table.setItem(i,3,QTableWidgetItem(contact.departement))
-            self.table.setItem(i,2,QTableWidgetItem(contact.email))
+            self.table.setItem(i,2,QTableWidgetItem(contact.number))
+            self.table.setItem(i,3,QTableWidgetItem(str(contact.departement)))
+            self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             i+=1
 

@@ -33,3 +33,8 @@ class Contact():
                 "\""+ self.dep +"\","+\
                 "\""+ self.email +"\""+\
                 "}"
+
+    def trimNumber(self):
+        for c in ".- ":
+            self.number = self.number.replace(c, "")
+        self.number = self.number.strip()

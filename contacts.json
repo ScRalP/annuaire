@@ -2,14 +2,21 @@
     {
         "firstname" : "Quentin",
         "lastname" : "ROBARD",
-        "number" : "06 15 15 15 15",
+        "number" : "---06    15 15 15 15    ",
         "departement" : 78420,
         "email" : "quentin.robard@sfr.fr"
     },
     {
         "firstname" : "Corentin",
         "lastname" : "BOLLAERT-LUCIANI",
-        "number" : "06 17 17 17 17",
+        "number" : "06 17 17 17 ... 17",
+        "departement" : 16300,
+        "email" : "cor_bo@hotmail.com"
+    },
+    {
+        "firstname" : "Corentdeux",
+        "lastname" : "BOLLAERT-LUCIANI",
+        "number" : "06 15 .....15 15 15",
         "departement" : 16300,
         "email" : "cor_bo@hotmail.com"
     }

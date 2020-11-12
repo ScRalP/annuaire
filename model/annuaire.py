@@ -14,11 +14,13 @@ class Annuaire():
         file = open("contacts.json", "r")
         for contact in json.loads(file.read()):
             self.addContact(Contact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
-            print(contact)
         file.close()
 
     def addContact(self,contact):
-        self.contacts.append(contact)
+        contact.trimNumber()
+
+        if(not self.isNumAlreadyTaken(contact.number)):
+            self.contacts.append(contact)
         
     def showContacts(self):
         for contact in self.contacts:
@@ -39,8 +41,9 @@ class Annuaire():
 
     def isNumAlreadyTaken(self, num):
         for contact in self.contacts:
-            if num.strip() == contact.num.strip():
+            if num.strip(" -.") == contact.number.strip(" -."):
                 return True
+                print("numero deja pris")
             return False
 
     def editContact(self, contact, firstname, lastname, number, departement, email):
