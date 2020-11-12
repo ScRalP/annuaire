@@ -65,6 +65,8 @@ class MainWindow(QMainWindow):
 
         #--- Creation du tableau de contact ---#
         self.table = QTableWidget()
+        self.table.setSelectionBehavior(QTableView.SelectRows)
+        self.table.setSelectionMode(QTableView.SingleSelection)
 
         #Ajout d'une ligne
         self.table.insertRow(0)
@@ -123,7 +125,7 @@ class MainWindow(QMainWindow):
         self.dialog.show()
 
     def updContact(self):
-        self.dialog = ContactForm(self.controller, "Modifier un contact")
+        self.dialog = ContactForm(self.controller, "Modifier un contact", )
         self.dialog.show()
 
     def delContact(self):

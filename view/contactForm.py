@@ -2,8 +2,10 @@ from PyQt5.QtWidgets import *
 
 
 class ContactForm(QMainWindow):
-    def __init__(self, controller, title, parent=None):
+    def __init__(self, controller, title, contact=None, parent=None):
         super(ContactForm, self).__init__(parent)
+        self.contact = contact
+        print(self.contact)
 
         # Init de la fenetre
         self.setWindowTitle(title)
