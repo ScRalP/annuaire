@@ -106,10 +106,10 @@ class MainWindow(QMainWindow):
         for contact in annuaire.contacts:
             self.table.insertRow(i)
 
-            self.table.setItem(i,0,QTableWidgetItem(contact.firstName))
-            self.table.setItem(i,1,QTableWidgetItem(contact.lastName))
+            self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
+            self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
+            self.table.setItem(i,3,QTableWidgetItem(contact.number))
+            self.table.setItem(i,3,QTableWidgetItem(contact.departement))
             self.table.setItem(i,2,QTableWidgetItem(contact.email))
-            self.table.setItem(i,3,QTableWidgetItem(contact.dep))
-            self.table.setItem(i,3,QTableWidgetItem(contact.tel))
 
             i+=1
