@@ -54,6 +54,11 @@ class Annuaire():
         contactToEdit.setDepartement(departement)
         contactToEdit.setEmail(email)
 
+    def getContactForNumber(self, number):
+        for contact in self.contacts:
+            if(contact.number == number):
+                return contact
+        return None
     def filteredContacts(self, stringToSearch):
         if (stringToSearch==""):
             return self.contacts
