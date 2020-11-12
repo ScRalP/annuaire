@@ -17,6 +17,7 @@ class MainWindow(QMainWindow):
 
         self.initMenu()
         self.initUi()
+        self.show()
 
     #Initialise la barre de menu
     def initMenu(self):
@@ -64,9 +65,6 @@ class MainWindow(QMainWindow):
 
         #--- Creation du tableau de contact ---#
         self.table = QTableWidget()
-        self.table.setColumnCount(4)
-        self.table.setHorizontalHeaderLabels(['nom', 'prenom', 'departement', 'tel'])
-        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         #Ajout d'une ligne
         self.table.insertRow(0)
@@ -101,6 +99,9 @@ class MainWindow(QMainWindow):
         annuaire = self.controller.getAnnuaire()
         #On vide la table
         self.table.clear()
+        self.table.setColumnCount(4)
+        self.table.setHorizontalHeaderLabels(['nom', 'prenom', 'departement', 'tel'])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         #On remplis la table
         i = 0
         for contact in annuaire.contacts:

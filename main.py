@@ -8,6 +8,7 @@ app = QApplication(sys.argv)
 class Controller():
     def __init__(self):
         self.annuaire = Annuaire()
+        self.annuaire.loadJSON()
         self.window = MainWindow(self)
 
     def getAnnuaire(self):
@@ -17,8 +18,5 @@ class Controller():
         return self.window
 
 controller = Controller()
-controller.annuaire.loadJSON()
-controller.annuaire.infoContacts()
-controller.window.show()
 
 sys.exit(app.exec_())
