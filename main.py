@@ -16,8 +16,8 @@ class Controller():
     def getWindow(self):
         return self.window
 
-
-controller = Controller()
+controller = Controller(Annuaire(), MainWindow())
+controller.annuaire.loadJSON()
 controller.window.show()
 
 sys.exit(app.exec_())
