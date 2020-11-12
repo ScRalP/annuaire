@@ -13,8 +13,6 @@ class MainWindow(QMainWindow):
         self.initMenu()
         self.initUi()
 
-        self.show()
-
     #Initialise la barre de menu
     def initMenu(self):
         #Actions du fileMenu

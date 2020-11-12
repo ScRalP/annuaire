@@ -16,5 +16,6 @@ class Controller():
         return self.window
 
 controller = Controller(Annuaire(), MainWindow())
+controller.window.show()
 
 sys.exit(app.exec_())
