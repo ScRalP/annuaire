@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import *
 
-
 class ContactForm(QMainWindow):
     def __init__(self, controller, title, contact=None, parent=None):
         super(ContactForm, self).__init__(parent)

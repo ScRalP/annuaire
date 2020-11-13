@@ -1,4 +1,3 @@
-from PyQt5.QtWidgets import *
 from view.contactForm import *
 
 class MainWindow(QMainWindow):
@@ -10,7 +9,7 @@ class MainWindow(QMainWindow):
 
         #Init de la fenetre
         self.setWindowTitle("Annuaire")
-        self.setGeometry(500,200,1000,650)
+        self.setGeometry(500,200,500,650)
         #empecher le resize
         self.setFixedSize(self.size())
         self.statusBar().setSizeGripEnabled(False)
@@ -105,6 +104,10 @@ class MainWindow(QMainWindow):
         self.table.setColumnCount(5)
         self.table.setHorizontalHeaderLabels(['firstname', 'lastname', 'number', 'departement', 'email'])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
