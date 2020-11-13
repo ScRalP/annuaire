@@ -42,7 +42,7 @@ class Annuaire():
     def isNumAlreadyTaken(self, num):
         for contact in self.contacts:
             #test non digit char and trim them
-            if num.strip("[^\d]") == contact.number.strip("[^\d]"):
+            if num.strip(" .-") == contact.number.strip(" .-"):
                 return True
                 #Numero deja pris
             return False
