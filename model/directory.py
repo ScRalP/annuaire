@@ -2,7 +2,7 @@
 from model.contact import *
 import json
 
-class Annuaire():
+class Directory():
     def __init__(self):
         self.contacts=[]
 
@@ -14,15 +14,22 @@ class Annuaire():
     def loadJSON(self):
         file = open("contacts.json", "r")
         for contact in json.loads(file.read()):
-            self.addContact(Contact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
+            self.createContact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email'])
         file.close()
 
-    def addContact(self, contact):
-        contact.trimNumber()
-
-        if(not self.isNumAlreadyTaken(contact.number)):
-            self.contacts.append(contact)
+    def createContact(self, firstname, lastname, number, departement, email):
+        trimedNumber = str(self.trimNumber(number))
+        if self.isNumAlreadyTaken(trimedNumber):
+            return False
+        self.contacts.append(Contact(firstname, lastname, trimedNumber, departement, email))
+        return True
         
+    def trimNumber(self, number):
+        trimmedNum = number.strip()
+        for c in ".- ":
+            trimmedNum = trimmedNum.replace(c, "")
+        return trimmedNum
+
     def showContacts(self):
         for contact in self.contacts:
             contact.printInfos(self)
@@ -40,7 +47,7 @@ class Annuaire():
     def isNumAlreadyTaken(self, num):
         for contact in self.contacts:
             #test non digit char and trim them
-            if num.strip(" .-") == contact.number.strip(" .-"):
+            if self.trimNumber(num) == self.trimNumber(contact.number):
                 return True
                 #Numero deja pris
             return False

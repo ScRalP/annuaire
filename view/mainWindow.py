@@ -8,7 +8,7 @@ class MainWindow(QMainWindow):
         self.controller = controller
 
         #Init de la fenetre
-        self.setWindowTitle("Annuaire")
+        self.setWindowTitle("Directory")
         self.setGeometry(500,200,500,650)
         #empecher le resize
         self.setFixedSize(self.size())
@@ -115,7 +115,7 @@ class MainWindow(QMainWindow):
         self.updateTable("")
 
     def updateTable(self, stringFilter=""):
-        annuaire = self.controller.getAnnuaire()
+        directory = self.controller.getDirectory()
         #On vide la table
         self.table.setRowCount(0)
         self.table.setColumnCount(5)
@@ -131,7 +131,7 @@ class MainWindow(QMainWindow):
 
         #On remplis la table
         i = 0
-        for contact in annuaire.filteredContacts(stringFilter):
+        for contact in directory.filteredContacts(stringFilter):
             self.table.insertRow(i)
 
             self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
@@ -145,7 +145,7 @@ class MainWindow(QMainWindow):
     def formatTelNumberDisplay(self, number):
         index = 0;
         formated = ""
-        for c in number:
+        for c in str(number):
             formated += " "+str(number[index]) if (index%2 == 0 and index != 0) else str(number[index])
             index += 1
         return formated
@@ -162,7 +162,7 @@ class MainWindow(QMainWindow):
             for item in items:
                 values.append(item.text())
 
-            contact = self.controller.getAnnuaire().getContactFromNumber(values[2])
+            contact = self.controller.getDirectory().getContactFromNumber(values[2])
             self.dialog = addContactForm(self.controller, "Modifier un contact", contact)
             self.dialog.show()
 
@@ -174,8 +174,8 @@ class MainWindow(QMainWindow):
             for item in items:
                 values.append(item.text())
 
-            contact = self.controller.getAnnuaire().getContactFromNumber(values[2])
-            self.controller.getAnnuaire().removeContact(contact)
+            contact = self.controller.getDirectory().getContactFromNumber(values[2])
+            self.controller.getDirectory().removeContact(contact)
             self.updateTable()
 
     def updateFilter(self, stringFilter):

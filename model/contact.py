@@ -21,11 +21,6 @@ class Contact():
     def setEmail(self, email):
         self.email = email
 
-    def trimNumber(self):
-        for c in ".- ":
-            self.number = self.number.replace(c, "")
-        self.number = self.number.strip()
-
     def searchByString(self, stringToSearch):
         if (stringToSearch in str(self.firstname) or
         stringToSearch in str(self.lastname) or
