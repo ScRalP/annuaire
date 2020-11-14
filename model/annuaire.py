@@ -26,9 +26,6 @@ class Annuaire():
         for contact in self.contacts:
             contact.printInfos(self)
 
-    # def removeContact(self, index):
-    #     self.contacts.pop(index)
-
     def removeContact(self, contact):
         self.contacts.remove(contact)
 

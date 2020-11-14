@@ -39,14 +39,26 @@ class ContactForm(QMainWindow):
         #Layout des boutons
         btnLayout = QHBoxLayout()
 
-        #Ajout des boutons
-        self.validate = QPushButton("Valider")
-        self.cancel = QPushButton("Annuler")
-        btnLayout.addWidget(self.validate)
-        btnLayout.addWidget(self.cancel)
+        #Creation des boutons
+        btnValidate = QPushButton("Valider")
+        btnCancel = QPushButton("Annuler")
+
+        #ajout des evenements
+        btnValidate.clicked.connect(self.updContact)
+        btnCancel.clicked.connect(self.closeApp)
+
+        #ajout au layout
+        btnLayout.addWidget(btnValidate)
+        btnLayout.addWidget(btnCancel)
 
         mainLayout.addLayout(btnLayout)
 
         window = QWidget()
         window.setLayout(mainLayout)
         self.setCentralWidget(window)
+
+    def updContact(self):
+        print("update")
+
+    def closeApp(self):
+        QDialog()

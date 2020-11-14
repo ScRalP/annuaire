@@ -8,7 +8,7 @@ class Contact():
 
     def setFirstname(self, firstname):
         self.firstname = firstname
-        
+
     def setLastname(self, lastname):
         self.lastname = lastname
 
@@ -26,11 +26,11 @@ class Contact():
 
     def toJSON(self):
         return "{"+\
-                "\""+ self.firstname +"\","+\
-                "\""+ self.lastname +"\","+\
-                "\""+ self.number +"\","+\
-                "\""+ self.dep +"\","+\
-                "\""+ self.email +"\""+\
+                "\"firstname\" :" + "\""+ self.firstname +"\","+\
+                "\"lastname\" :" + "\""+ self.lastname +"\","+\
+                "\"numer\" :" + "\""+ self.number +"\","+\
+                "\"dep\" :" + "\""+ self.dep +"\","+\
+                "\"email\" :" + "\""+ self.email +"\""+\
                 "}"
 
     def trimNumber(self):
