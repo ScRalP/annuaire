@@ -5,8 +5,10 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
-        #Récupération du directoryController
+        #Récupération des controllers
         self.directoryController = directoryController.directoryController()
+        self.contactController = contactController.contactController()
+
         #Init de la fenetre
         self.setWindowTitle("Contacts")
         self.setGeometry(500,200,500,650)
@@ -131,7 +133,7 @@ class MainWindow(QMainWindow):
 
         #On remplis la table
         i = 0
-        for contact in directory.filteredContacts(stringFilter):
+        for contact in self.directoryController.filteredContacts(stringFilter):
             self.table.insertRow(i)
 
             self.table.setItem(i,0,QTableWidgetItem(contact.firstname))

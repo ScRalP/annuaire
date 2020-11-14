@@ -22,10 +22,11 @@ class Contact():
         self.email = email
 
     def searchByString(self, stringToSearch):
-        if (stringToSearch in str(self.firstname) or
-        stringToSearch in str(self.lastname) or
-        stringToSearch in str(self.number) or
-        stringToSearch in str(self.departement) or
-        stringToSearch in str(self.email)):
+        lower_stringToSearch = stringToSearch.lower()
+        if (lower_stringToSearch in str(self.firstname).lower() or
+        lower_stringToSearch in str(self.lastname).lower() or
+        lower_stringToSearch in str(self.number).lower() or
+        lower_stringToSearch in str(self.departement).lower() or
+        lower_stringToSearch in str(self.email).lower()):
             return True
         return False
