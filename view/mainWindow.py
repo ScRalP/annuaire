@@ -136,11 +136,19 @@ class MainWindow(QMainWindow):
 
             self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
             self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
-            self.table.setItem(i,2,QTableWidgetItem(contact.number))
+            self.table.setItem(i,2,QTableWidgetItem(self.formatTelNumberDisplay(contact.number)))
             self.table.setItem(i,3,QTableWidgetItem(str(contact.departement)))
             self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             i+=1
+
+    def formatTelNumberDisplay(self, number):
+        index = 0;
+        formated = ""
+        for c in number:
+            formated += " "+str(number[index]) if (index%2 == 0 and index != 0) else str(number[index])
+            index += 1
+        return formated
 
     def addContact(self):
         self.dialog = ContactForm(self.controller, "Ajouter un contact")
