@@ -58,7 +58,13 @@ class ContactForm(QMainWindow):
         self.setCentralWidget(window)
 
     def updContact(self):
-        print("update")
+        #Verifier si le contact existe
+
+        #si ou modifier le contact
+
+        #si non ajouter nouveau contact
+
+        #fermer la modal
         self.close()
 
     def close(self):
