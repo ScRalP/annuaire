@@ -1,12 +1,10 @@
 
 from model.directory import *
-from view.mainWindow import *
 
 class directoryController():
     def __init__(self):
         self.directory = Directory()
         self.directory.loadJSON()
-        self.window = MainWindow(self)
 
     def getDirectory(self):
         return self.directory

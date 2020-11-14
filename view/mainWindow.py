@@ -1,14 +1,14 @@
 from view.addContactForm import *
+from controller import directoryController,contactController
 
 class MainWindow(QMainWindow):
-    def __init__(self, controller):
+    def __init__(self):
         super(MainWindow, self).__init__()
 
-        #Récupération du controller
-        self.controller = controller
-
+        #Récupération du directoryController
+        self.directoryController = directoryController.directoryController()
         #Init de la fenetre
-        self.setWindowTitle("Directory")
+        self.setWindowTitle("Contacts")
         self.setGeometry(500,200,500,650)
         #empecher le resize
         self.setFixedSize(self.size())
@@ -27,11 +27,11 @@ class MainWindow(QMainWindow):
 
         loadMenu = QAction("&Load", self)
         loadMenu.setShortcut("Ctrl+O")
-        loadMenu.triggered.connect(self.controller.loadJSON)
+        loadMenu.triggered.connect(self.directoryController.loadJSON)
 
         saveMenu = QAction("&Save", self)
         saveMenu.setShortcut("Ctrl+S")
-        saveMenu.triggered.connect(self.controller.saveToJson)
+        saveMenu.triggered.connect(self.directoryController.saveToJson)
 
         #Actions du actionMenu
         addMenu = QAction("&Ajouter", self)
@@ -115,7 +115,7 @@ class MainWindow(QMainWindow):
         self.updateTable("")
 
     def updateTable(self, stringFilter=""):
-        directory = self.controller.getDirectory()
+        directory = self.directoryController.getDirectory()
         #On vide la table
         self.table.setRowCount(0)
         self.table.setColumnCount(5)
@@ -151,7 +151,7 @@ class MainWindow(QMainWindow):
         return formated
 
     def addContact(self):
-        self.dialog = addContactForm(self.controller, "Ajouter un contact")
+        self.dialog = addContactForm(self.directoryController, "Ajouter un contact")
         self.dialog.show()
 
     def updContact(self):
@@ -162,8 +162,8 @@ class MainWindow(QMainWindow):
             for item in items:
                 values.append(item.text())
 
-            contact = self.controller.getDirectory().getContactFromNumber(values[2])
-            self.dialog = addContactForm(self.controller, "Modifier un contact", contact)
+            contact = self.directoryController.getDirectory().getContactFromNumber(values[2])
+            self.dialog = addContactForm(self.directoryController, "Modifier un contact", contact)
             self.dialog.show()
 
     def delContact(self):
@@ -174,8 +174,8 @@ class MainWindow(QMainWindow):
             for item in items:
                 values.append(item.text())
 
-            contact = self.controller.getDirectory().getContactFromNumber(values[2])
-            self.controller.getDirectory().removeContact(contact)
+            contact = self.directoryController.getDirectory().getContactFromNumber(values[2])
+            self.directoryController.getDirectory().removeContact(contact)
             self.updateTable()
 
     def updateFilter(self, stringFilter):

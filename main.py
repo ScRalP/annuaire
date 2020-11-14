@@ -5,6 +5,6 @@ from controller.directoryController import *
 
 app = QApplication(sys.argv)
 
-directoryController = directoryController()
+MainWindow = MainWindow()
 
 sys.exit(app.exec_())
