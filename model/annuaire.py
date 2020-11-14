@@ -7,8 +7,9 @@ class Annuaire():
         self.contacts=[]
 
     def saveToJson(self):
-        for contact in self.contacts:
-            contact.toJSON(self)
+        file = open("export.json", "a")
+        file.write(json.dumps(self.contacts, default=lambda x: x.__dict__))
+        file.close()
 
     def loadJSON(self):
         file = open("contacts.json", "r")
