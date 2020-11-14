@@ -62,4 +62,4 @@ class ContactForm(QMainWindow):
         self.close()
 
     def close(self):
-        self.close()
+        print("close")
