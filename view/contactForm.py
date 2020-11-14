@@ -22,17 +22,23 @@ class ContactForm(QMainWindow):
 
         #Ajout des lignes
         if self.contact is not None:
-            formLayout.addRow(QLabel("firstname"), QLineEdit(self.contact.firstname))
-            formLayout.addRow(QLabel("lastname"), QLineEdit(self.contact.lastname))
-            formLayout.addRow(QLabel("number"), QLineEdit(self.contact.number))
-            formLayout.addRow(QLabel("departement"), QLineEdit(str(self.contact.departement)))
-            formLayout.addRow(QLabel("email"), QLineEdit(self.contact.email))
+            self.firstnameInput   = QLineEdit(self.contact.firstname)
+            self.lastnameInput    = QLineEdit(self.contact.firstname)
+            self.numeroInput      = QLineEdit(self.contact.firstname)
+            self.departementInput = QLineEdit(str(self.contact.departement))
+            self.emailInput       = QLineEdit(self.contact.firstname)
         else:
-            formLayout.addRow(QLabel("firstname"), QLineEdit())
-            formLayout.addRow(QLabel("lastname"), QLineEdit())
-            formLayout.addRow(QLabel("number"), QLineEdit())
-            formLayout.addRow(QLabel("departement"), QLineEdit())
-            formLayout.addRow(QLabel("email"), QLineEdit())
+            self.firstnameInput   = QLineEdit()
+            self.lastnameInput    = QLineEdit()
+            self.numeroInput      = QLineEdit()
+            self.departementInput = QLineEdit()
+            self.emailInput       = QLineEdit()
+
+        formLayout.addRow(QLabel("firstname")  , self.firstnameInput)
+        formLayout.addRow(QLabel("lastname")   , self.lastnameInput)
+        formLayout.addRow(QLabel("numero")     , self.numeroInput)
+        formLayout.addRow(QLabel("departement"), self.departementInput)
+        formLayout.addRow(QLabel("firstname")  , self.emailInput)
 
         mainLayout.addLayout(formLayout)
 
@@ -58,14 +64,19 @@ class ContactForm(QMainWindow):
         self.setCentralWidget(window)
 
     def updContact(self):
-        #Verifier si le contact existe
-
-        #si ou modifier le contact
-
-        #si non ajouter nouveau contact
+        firstname   = self.firstnameInput.text()
+        lastname    = self.lastnameInput.text()
+        number      = self.numeroInput.text()
+        departement = self.departementInput.text()
+        email       = self.emailInput.text()
+        #Verifier si le numero existe
+        if( self.controller.isNumeroAlreadyTaken( number ) ):
+            #si ou modifier le contact
+            self.controller.editContact( self.controller.getContactFromNumber(number), firstname, lastname, number, departement, email)
+        else:
+            #si non ajouter nouveau contact
+            self.controller.addContact(  )
 
         #fermer la modal
         self.close()
 
-    def close(self):
-        print("close")

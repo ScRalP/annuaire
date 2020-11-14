@@ -1,4 +1,4 @@
-from view.contactForm import *
+from view.addContactForm import *
 
 class MainWindow(QMainWindow):
     def __init__(self, controller):
@@ -151,7 +151,7 @@ class MainWindow(QMainWindow):
         return formated
 
     def addContact(self):
-        self.dialog = ContactForm(self.controller, "Ajouter un contact")
+        self.dialog = addContactForm(self.controller, "Ajouter un contact")
         self.dialog.show()
 
     def updContact(self):
@@ -163,7 +163,7 @@ class MainWindow(QMainWindow):
                 values.append(item.text())
 
             contact = self.controller.getAnnuaire().getContactFromNumber(values[2])
-            self.dialog = ContactForm(self.controller, "Modifier un contact", contact)
+            self.dialog = addContactForm(self.controller, "Modifier un contact", contact)
             self.dialog.show()
 
     def delContact(self):
