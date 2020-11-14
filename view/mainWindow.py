@@ -82,10 +82,16 @@ class MainWindow(QMainWindow):
         btnUpd = QPushButton('Editer', self)
         btnDel = QPushButton('Supprimer', self)
 
+        #ajout des evenement
+        btnAdd.clicked.connect(self.addContact);
+        btnUpd.clicked.connect(self.updContact);
+        btnDel.clicked.connect(self.delContact);
+
         #ajout des boutons dans le layout
         btnLayout.addWidget(btnAdd)
         btnLayout.addWidget(btnUpd)
         btnLayout.addWidget(btnDel)
+
 
         mainLayout.addLayout(btnLayout)
 
@@ -97,7 +103,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(window)
         self.updateTable("")
 
-    def updateTable(self, stringFilter):
+    def updateTable(self, stringFilter=""):
         annuaire = self.controller.getAnnuaire()
         #On vide la table
         self.table.setRowCount(0)
@@ -142,7 +148,16 @@ class MainWindow(QMainWindow):
             self.dialog.show()
 
     def delContact(self):
-        print("del")
+        items = self.table.selectedItems()
+        #On verifie que l'on le cliques pas sur une ligne vide
+        if len(items) > 0:
+            values = []
+            for item in items:
+                values.append(item.text())
+
+            contact = self.controller.getAnnuaire().getContactForNumber(values[2])
+            self.controller.getAnnuaire().removeContact(contact)
+            self.updateTable()
 
     def updateFilter(self, stringFilter):
         self.updateTable(stringFilter)

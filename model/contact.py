@@ -20,7 +20,6 @@ class Contact():
 
     def setEmail(self, email):
         self.email = email
-        
 
     def printInfos(self):
         print(self.firstname)

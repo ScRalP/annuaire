@@ -16,7 +16,7 @@ class Annuaire():
             self.addContact(Contact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
         file.close()
 
-    def addContact(self,contact):
+    def addContact(self, contact):
         contact.trimNumber()
 
         if(not self.isNumAlreadyTaken(contact.number)):
@@ -60,6 +60,7 @@ class Annuaire():
             if(contact.number == number):
                 return contact
         return None
+
     def filteredContacts(self, stringToSearch):
         if (stringToSearch==""):
             return self.contacts
