@@ -24,13 +24,24 @@ class MainWindow(QMainWindow):
         exitMenu = QAction("&Quitter", self)
         exitMenu.setShortcut("Ctrl+Q")
         exitMenu.triggered.connect(qApp.quit)
+
+        loadMenu = QAction("&Load", self)
+        loadMenu.setShortcut("Ctrl+O")
+        loadMenu.triggered.connect(self.controller.loadJSON)
+
+        saveMenu = QAction("&Save", self)
+        saveMenu.setShortcut("Ctrl+S")
+        saveMenu.triggered.connect(self.controller.saveToJson)
+
         #Actions du actionMenu
         addMenu = QAction("&Ajouter", self)
         addMenu.setShortcut("Ctrl+N")
         addMenu.triggered.connect(self.addContact)
+
         updMenu = QAction("&Editer", self)
         updMenu.setShortcut("Ctrl+E")
         updMenu.triggered.connect(self.updContact)
+
         delMenu = QAction("&Supprimer", self)
         delMenu.setShortcut("Ctrl+D")
         delMenu.triggered.connect(self.delContact)
@@ -40,6 +51,8 @@ class MainWindow(QMainWindow):
         menu = self.menuBar()
         fileMenu = menu.addMenu("&Fichier")
         fileMenu.addAction(exitMenu)
+        fileMenu.addAction(loadMenu)
+        fileMenu.addAction(saveMenu)
         actionMenu = menu.addMenu("&Action")
         actionMenu.addAction(addMenu)
         actionMenu.addAction(updMenu)
