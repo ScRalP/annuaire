@@ -156,7 +156,7 @@ class MainWindow(QMainWindow):
             for item in items:
                 values.append(item.text())
 
-            contact = self.controller.getAnnuaire().getContactForNumber(values[2])
+            contact = self.controller.getAnnuaire().getContactFromNumber(values[2])
             self.dialog = ContactForm(self.controller, "Modifier un contact", contact)
             self.dialog.show()
 
@@ -168,7 +168,7 @@ class MainWindow(QMainWindow):
             for item in items:
                 values.append(item.text())
 
-            contact = self.controller.getAnnuaire().getContactForNumber(values[2])
+            contact = self.controller.getAnnuaire().getContactFromNumber(values[2])
             self.controller.getAnnuaire().removeContact(contact)
             self.updateTable()
 

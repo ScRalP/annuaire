@@ -21,18 +21,6 @@ class Contact():
     def setEmail(self, email):
         self.email = email
 
-    def printInfos(self):
-        print(self.firstname)
-
-    def toJSON(self):
-        return "{"+\
-                "\""+ self.firstname +"\","+\
-                "\""+ self.lastname +"\","+\
-                "\""+ self.number +"\","+\
-                "\""+ self.dep +"\","+\
-                "\""+ self.email +"\""+\
-                "}"
-
     def trimNumber(self):
         for c in ".- ":
             self.number = self.number.replace(c, "")
