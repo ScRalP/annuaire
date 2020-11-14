@@ -1,0 +1,19 @@
+{
+    "Title" : "My contacts",
+    "Quit" : "Quit",
+    "Load" : "Load",
+    "Save" : "Save",
+    "Add" : "Add",
+    "Edit" : "Edit",
+    "Delete" : "Delete",
+    "File" : "File",
+    "Action" : "Action",
+    "Search" : "Search",
+    "Firstname": "Firstname",
+    "Lastname": "Lastname",
+    "Number": "Number",
+    "Departement": "Departement",
+    "Email": "Email",
+    "AddContact":"Add a contact",
+    "EditContact":"Edit a contact"
+}
