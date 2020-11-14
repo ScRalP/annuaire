@@ -105,9 +105,7 @@ class MainWindow(QMainWindow):
         btnLayout.addWidget(btnUpd)
         btnLayout.addWidget(btnDel)
 
-
         mainLayout.addLayout(btnLayout)
-
 
         window = QWidget()
         window.setLayout(mainLayout)

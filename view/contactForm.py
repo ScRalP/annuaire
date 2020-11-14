@@ -45,7 +45,7 @@ class ContactForm(QMainWindow):
 
         #ajout des evenements
         btnValidate.clicked.connect(self.updContact)
-        btnCancel.clicked.connect(self.closeApp)
+        btnCancel.clicked.connect(self.close)
 
         #ajout au layout
         btnLayout.addWidget(btnValidate)
@@ -59,6 +59,7 @@ class ContactForm(QMainWindow):
 
     def updContact(self):
         print("update")
+        self.close()
 
-    def closeApp(self):
-        QDialog()
+    def close(self):
+        self.close()
