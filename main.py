@@ -26,6 +26,9 @@ class Controller():
     def addContact(self,contact):
         self.annuaire.addContact(contact)
 
+    def editContact(self, contact, firstname, lastname, number, departement, email):
+        self.annuaire.editContact(contact, firstname, lastname, number, departement, email)
+
 controller = Controller()
 
 sys.exit(app.exec_())
