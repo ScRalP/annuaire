@@ -66,6 +66,8 @@ class MainWindow(QMainWindow):
         enMenu.triggered.connect(lambda: self.setLanguage("EN"))
         monkeyMenu = QAction("&Hooka-ho-hou", self)
         monkeyMenu.triggered.connect(lambda: self.setLanguage("MONKEY"))
+        piouMenu = QAction("&Pioupiou", self)
+        piouMenu.triggered.connect(lambda: self.setLanguage("PIOU"))
 
         #Ajout du menu
         self.statusBar()
@@ -87,6 +89,7 @@ class MainWindow(QMainWindow):
         languageMenu.addAction(frMenu)
         languageMenu.addAction(enMenu)
         languageMenu.addAction(monkeyMenu)
+        languageMenu.addAction(piouMenu)
 
     # Initialise la fenetre avec les composants
     def initUi(self):
