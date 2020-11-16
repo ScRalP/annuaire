@@ -6,6 +6,10 @@ from Tools import SaveFileName
 
 import json
 
+from PyQt5 import *
+from pathlib import Path
+
+
 class MainWindow(QMainWindow):
     def __init__(self, language):
         super(MainWindow, self).__init__()
@@ -42,11 +46,14 @@ class MainWindow(QMainWindow):
 
         loadMenu = QAction("&"+self.translation['Load'], self)
         loadMenu.setShortcut("Ctrl+O")
-        loadMenu.triggered.connect(lambda: self.directoryController.loadJSON(SaveFileName))
+        loadMenu.triggered.connect(lambda: self.loadJSON())
 
         saveMenu = QAction("&"+self.translation['Save'], self)
         saveMenu.setShortcut("Ctrl+S")
         saveMenu.triggered.connect(lambda: self.directoryController.saveToJson(SaveFileName))
+
+        saveAsMenu = QAction("&"+self.translation['SaveAs'], self)
+        saveAsMenu.triggered.connect(self.saveAs)
 
         #Actions du actionMenu
         addMenu = QAction("&"+self.translation['Add'], self)
@@ -68,6 +75,7 @@ class MainWindow(QMainWindow):
         fileMenu.addAction(exitMenu)
         fileMenu.addAction(loadMenu)
         fileMenu.addAction(saveMenu)
+        fileMenu.addAction(saveAsMenu)
         actionMenu = menu.addMenu("&"+self.translation['Action'])
         actionMenu.addAction(addMenu)
         actionMenu.addAction(updMenu)
@@ -164,6 +172,17 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             i+=1
+
+    def loadJSON(self):
+        name = QFileDialog.getOpenFileName(self,self.translation['Load'], "", "JSON (*.json)")
+        if not (name[0] == None or name[0] == ""):
+            self.directoryController.loadJSON(Path(name[0]))
+        self.updateTable()
+
+    def saveAs(self):
+        name = QFileDialog.getSaveFileName(self,self.translation['SaveAs'], "", "JSON (*.json)")
+        if not (name[0] == None or name[0] == ""):
+            self.directoryController.saveToJson(Path(name[0]))
 
     def addContact(self):
         self.dialog = AddContactForm(self.translation, self.directoryController,self.contactController, self.translation['AddContact'], self)
