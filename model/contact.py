@@ -24,13 +24,3 @@ class Contact():
 
     def setFavorite(self, isFavorite):
         self.isFavorite = isFavorite
-
-    def searchByString(self, stringToSearch):
-        lower_stringToSearch = stringToSearch.lower()
-        if (lower_stringToSearch in str(self.firstname).lower() or
-        lower_stringToSearch in str(self.lastname).lower() or
-        lower_stringToSearch in str(self.number).lower() or
-        lower_stringToSearch in str(self.departement).lower() or
-        lower_stringToSearch in str(self.email).lower()):
-            return True
-        return False
