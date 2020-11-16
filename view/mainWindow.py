@@ -68,6 +68,14 @@ class MainWindow(QMainWindow):
         delMenu.setShortcut("Ctrl+D")
         delMenu.triggered.connect(self.delContact)
 
+        #Actions de langue
+        frMenu = QAction("&"+self.translation['French'], self)
+        #frMenu.triggered.connect(self.reopen(self.translation['French']))
+        enMenu = QAction("&"+self.translation['English'], self)
+        #enMenu.triggered.connect(self.reopen(self.translation['English']))
+        monkeyMenu = QAction("&"+self.translation['Monkey'], self)
+        #monkeyMenu.triggered.connect(self.reopen(self.translation['Monkey']))
+
         #Ajout du menu
         self.statusBar()
         menu = self.menuBar()
@@ -80,6 +88,10 @@ class MainWindow(QMainWindow):
         actionMenu.addAction(addMenu)
         actionMenu.addAction(updMenu)
         actionMenu.addAction(delMenu)
+        languageMenu = menu.addMenu("&"+self.translation['Languages'])
+        languageMenu.addAction(frMenu)
+        languageMenu.addAction(enMenu)
+        languageMenu.addAction(monkeyMenu)
 
     #Initialise la fenetre avec les composants
     def initUi(self):
@@ -157,7 +169,8 @@ class MainWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
-        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
@@ -171,10 +184,12 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
             self.table.setItem(i,2,QTableWidgetItem(formatTelNumberDisplay(contact.number)))
             self.table.setItem(i,3,QTableWidgetItem(str(contact.departement)))
-            self.table.setItem(i,4,QTableWidgetItem(contact.email))            
+            self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             if (contact.isFavorite == True):
-                self.table.setItem(i,5,QTableWidgetItem("✔"))
+                widget = QTableWidgetItem("✔")
+                widget.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.table.setItem(i,5,widget)
             else:
                 self.table.setItem(i,5,QTableWidgetItem(""))
             i+=1
