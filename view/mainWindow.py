@@ -113,6 +113,7 @@ class MainWindow(QMainWindow):
         self.table = QTableWidget()
         self.table.setSelectionBehavior(QTableView.SelectRows)
         self.table.setSelectionMode(QTableView.SingleSelection)
+        self.table.setSortingEnabled(True)
 
         mainLayout.addWidget(self.table)
 
@@ -170,7 +171,6 @@ class MainWindow(QMainWindow):
         self.table.setColumnWidth(1,160)
         self.table.setColumnWidth(2,80)
         self.table.setColumnWidth(4,270)
-        self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
 
@@ -186,7 +186,9 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             if (contact.isFavorite == True):
-                self.table.setItem(i,5,QTableWidgetItem("✔"))
+                item = QTableWidgetItem("✔")
+                item.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.table.setItem(i,5,item)
             else:
                 self.table.setItem(i, 5, QTableWidgetItem(""))
             i += 1
