@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
         delMenu.triggered.connect(self.delContact)
 
         # Actions de langue
-        frMenu = QAction("&Francais", self)
+        frMenu = QAction("&Fran\u00e7ais", self)
         frMenu.triggered.connect(self.reOpen("FR"))
         enMenu = QAction("&Anglais", self)
         enMenu.triggered.connect(self.reOpen("EN"))
