@@ -23,7 +23,7 @@ class MainWindow(QMainWindow):
         self.contactController = contactController.contactController()
 
         # Init de la fenetre
-        self.setGeometry(500, 200, 800, 800)
+        self.setGeometry(500, 200, 1000, 800)
 
         self.setLanguage(language)
 
@@ -150,14 +150,15 @@ class MainWindow(QMainWindow):
         directory = self.directoryController.getDirectory()
         # On vide la table
         self.table.setRowCount(0)
-        self.table.setColumnCount(6)
+        self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels([
             self.translation['Firstname'],
             self.translation['Lastname'],
             self.translation['Number'],
             self.translation['Departement'],
             self.translation['Email'],
-            self.translation['IsFavorite']
+            self.translation['IsFavorite'],
+            "INDEX"
         ])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Interactive)
@@ -166,6 +167,8 @@ class MainWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Interactive)
         self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(6, QHeaderView.Fixed)
+        # self.table.setColumnHidden(6,True)
 
         self.table.setColumnWidth(0,120)
         self.table.setColumnWidth(1,160)
@@ -191,7 +194,10 @@ class MainWindow(QMainWindow):
                 self.table.setItem(i,5,item)
             else:
                 self.table.setItem(i, 5, QTableWidgetItem(""))
+                
+            self.table.setItem(i,6,QTableWidgetItem(str(i)))
             i += 1
+            
 
     def loadJSON(self):
         name = QFileDialog.getOpenFileName(self, self.translation['Load'], "", "JSON (*.json)")
@@ -211,9 +217,20 @@ class MainWindow(QMainWindow):
 
     def editContact(self):
         if len(self.table.selectedIndexes()) > 0:
+            self.table.setColumnHidden(6,False)
+            selectedContact = None
+            index = 0
+            for contact in self.displayedContacts:
+                if self.table.selectedItems()[6].text() == str(index):
+                    selectedContact = self.displayedContacts[index]
+                    break
+                index +=1
+            # self.table.setColumnHidden(6,True)
+            
+            self.table.setSortingEnabled(False)
+
             self.dialog = EditContactForm(self.translation, self.directoryController, self.contactController,
-                                          self.translation['EditContact'], self,
-                                          self.displayedContacts[self.table.selectedIndexes()[0].row()])
+                                          self.translation['EditContact'], self,selectedContact)
             self.dialog.show()
 
     def delContact(self):
@@ -223,11 +240,6 @@ class MainWindow(QMainWindow):
 
     def updateFilter(self, stringFilter):
         self.updateTable(stringFilter)
-
-    def reOpen(self, langue="en"):
-        newWindow = MainWindow(langue)
-        newWindow.directoryController = self.directoryController
-        self.close()
     
     def setLanguage(self, language):
         # chargement du fichier de traduction
