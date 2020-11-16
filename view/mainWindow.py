@@ -145,6 +145,8 @@ class MainWindow(QMainWindow):
         self.updateTable("")
 
     def updateTable(self, stringFilter=""):
+        
+        self.table.setSortingEnabled(False)
         self.displayedContacts = self.directoryController.filteredContacts(stringFilter)
 
         directory = self.directoryController.getDirectory()
@@ -168,7 +170,7 @@ class MainWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Interactive)
         self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(6, QHeaderView.Fixed)
-        # self.table.setColumnHidden(6,True)
+        self.table.setColumnHidden(6,True)
 
         self.table.setColumnWidth(0,120)
         self.table.setColumnWidth(1,160)
@@ -197,6 +199,9 @@ class MainWindow(QMainWindow):
                 
             self.table.setItem(i,6,QTableWidgetItem(str(i)))
             i += 1
+
+            
+        self.table.setSortingEnabled(True)
             
 
     def loadJSON(self):
@@ -225,17 +230,26 @@ class MainWindow(QMainWindow):
                     selectedContact = self.displayedContacts[index]
                     break
                 index +=1
-            # self.table.setColumnHidden(6,True)
-            
-            self.table.setSortingEnabled(False)
+            self.table.setColumnHidden(6,True)
 
             self.dialog = EditContactForm(self.translation, self.directoryController, self.contactController,
                                           self.translation['EditContact'], self,selectedContact)
             self.dialog.show()
 
+
     def delContact(self):
-        if len(self.table.selectedIndexes()) > 0:
-            self.directoryController.removeContact(self.displayedContacts[self.table.selectedIndexes()[0].row()])
+         if len(self.table.selectedIndexes()) > 0:
+            self.table.setColumnHidden(6,False)
+            selectedContact = None
+            index = 0
+            for contact in self.displayedContacts:
+                if self.table.selectedItems()[6].text() == str(index):
+                    selectedContact = self.displayedContacts[index]
+                    break
+                index +=1
+            self.table.setColumnHidden(6,True)
+            
+            self.directoryController.removeContact(selectedContact)
             self.updateTable()
 
     def updateFilter(self, stringFilter):
