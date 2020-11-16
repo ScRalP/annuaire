@@ -15,5 +15,7 @@
     "Departement": "Departement",
     "Email": "Email",
     "AddContact":"Add a contact",
-    "EditContact":"Edit a contact"
+    "EditContact":"Edit a contact",
+    "Ok":"Ok",
+    "Cancel":"Cancel"
 }

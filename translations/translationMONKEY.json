@@ -15,5 +15,7 @@
     "Departement": "Ho",
     "Email": "Hou-hou",
     "AddContact":"Hu",
-    "EditContact":"Ha"
+    "EditContact":"Ha",
+    "Ok":"Hok",
+    "Cancel":"Pok"
 }

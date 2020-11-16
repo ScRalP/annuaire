@@ -1,19 +1,18 @@
 from view.contactForm import *
 
 class AddContactForm(ContactForm):
-    def __init__(self, parent=None):
-        super(ContactForm, self).__init__(parent)
+    def __init__(self, language, directoryController, contactController, title, mainwindow):
+        ContactForm.__init__(self, language, directoryController, contactController, title, mainwindow)
 
-    def addContact(self):
-        firstname = self.firstnameInput.text()
-        lastname = self.lastnameInput.text()
-        number = self.numeroInput.text()
-        departement = self.departementInput.text()
-        email = self.emailInput.text()
+    def handleOk(self):
 
-        # Verifier si le numero existe
-        if ( not self.controller.createContact( firstname, lastname, number, departement, email ) ):
-            QDialog("Ce numéro existe déjà")
-            return False
+        self.directoryController.addContact(self.contactController.createContact(
+        self.firstnameInput.text(),
+        self.lastnameInput.text(),
+        self.numeroInput.text(),
+        self.departementInput.text(),
+        self.emailInput.text()))
 
-        return True
+        self.mainWindow.updateTable()
+        
+        self.close()

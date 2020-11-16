@@ -1,4 +1,5 @@
 from view.addContactForm import *
+from view.editContactForm import *
 from controller import directoryController,contactController
 from Tools import formatTelNumberDisplay
 from Tools import SaveFileName
@@ -8,6 +9,9 @@ import json
 class MainWindow(QMainWindow):
     def __init__(self, language):
         super(MainWindow, self).__init__()
+
+        #Liste à afficher
+        self.displayedContacts = []
 
         #chargement du fichier de traduction
         file = open("translations/translation"+language.upper()+".json", "r")
@@ -20,7 +24,7 @@ class MainWindow(QMainWindow):
 
         #Init de la fenetre
         self.setWindowTitle(self.translation['Title'])
-        self.setGeometry(500,200,500,650)
+        self.setGeometry(500,200,800,800)
         #empecher le resize
         self.setFixedSize(self.size())
         self.statusBar().setSizeGripEnabled(False)
@@ -51,7 +55,7 @@ class MainWindow(QMainWindow):
 
         updMenu = QAction("&"+self.translation['Edit'], self)
         updMenu.setShortcut("Ctrl+E")
-        updMenu.triggered.connect(self.updContact)
+        updMenu.triggered.connect(self.editContact)
 
         delMenu = QAction("&"+self.translation['Delete'], self)
         delMenu.setShortcut("Ctrl+D")
@@ -108,7 +112,7 @@ class MainWindow(QMainWindow):
 
         #ajout des evenement
         btnAdd.clicked.connect(self.addContact);
-        btnUpd.clicked.connect(self.updContact);
+        btnUpd.clicked.connect(self.editContact);
         btnDel.clicked.connect(self.delContact);
 
         #ajout des boutons dans le layout
@@ -126,6 +130,8 @@ class MainWindow(QMainWindow):
         self.updateTable("")
 
     def updateTable(self, stringFilter=""):
+        self.displayedContacts = self.directoryController.filteredContacts(stringFilter)
+
         directory = self.directoryController.getDirectory()
         #On vide la table
         self.table.setRowCount(0)
@@ -148,7 +154,7 @@ class MainWindow(QMainWindow):
 
         #On remplis la table
         i = 0
-        for contact in self.directoryController.filteredContacts(stringFilter):
+        for contact in self.displayedContacts :
             self.table.insertRow(i)
 
             self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
@@ -160,32 +166,16 @@ class MainWindow(QMainWindow):
             i+=1
 
     def addContact(self):
-        self.dialog = addContactForm(self.directoryController, self.translation['Addcontact'])
+        self.dialog = AddContactForm(self.translation, self.directoryController,self.contactController, self.translation['AddContact'], self)
         self.dialog.show()
 
-    def updContact(self):
-        items = self.table.selectedItems()
-        #On verifie que l'on le cliques pas sur une ligne vide
-        if len(items) > 0:
-            values = []
-            for item in items:
-                values.append(item.text())
-
-            contact = self.directoryController.getDirectory().getContactFromNumber(values[2])
-            self.dialog = addContactForm(self.directoryController, self.translation['EditContact'], contact)
-            self.dialog.show()
+    def editContact(self):
+        self.dialog = EditContactForm(self.translation, self.directoryController,self.contactController, self.translation['EditContact'], self, self.displayedContacts[self.table.selectedIndexes()[0].row()])
+        self.dialog.show()
 
     def delContact(self):
-        items = self.table.selectedItems()
-        #On verifie que l'on le cliques pas sur une ligne vide
-        if len(items) > 0:
-            values = []
-            for item in items:
-                values.append(item.text())
-
-            contact = self.directoryController.getDirectory().getContactFromNumber(values[2])
-            self.directoryController.getDirectory().removeContact(contact)
-            self.updateTable()
+        self.directoryController.removeContact(self.displayedContacts[self.table.selectedIndexes()[0].row()])
+        self.updateTable()
 
     def updateFilter(self, stringFilter):
         self.updateTable(stringFilter)

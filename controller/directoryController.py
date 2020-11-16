@@ -1,13 +1,14 @@
 from model.directory import *
 from Tools import trimNumber
 from controller.contactController import *
+from Tools import SaveFileName
 import json
 
 class directoryController():
     def __init__(self):
         self.directory = Directory()
         self.contactController = contactController()
-        self.loadJSON("contacts")
+        self.loadJSON(SaveFileName)
 
     def getDirectory(self):
         return self.directory
