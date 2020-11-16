@@ -76,7 +76,7 @@ class MainWindow(QMainWindow):
         monkeyMenu = QAction("&" + self.translation['Monkey'], self)
         # monkeyMenu.triggered.connect(self.reOpen(self.translation['Monkey']))
 
-        # Ajout du menu
+        #Ajout du menu
         self.statusBar()
         menu = self.menuBar()
         fileMenu = menu.addMenu("&" + self.translation['File'])
@@ -131,9 +131,9 @@ class MainWindow(QMainWindow):
         btnDel = QPushButton("&" + self.translation['Delete'], self)
 
         # ajout des evenement
-        btnAdd.clicked.connect(self.addContact);
-        btnUpd.clicked.connect(self.editContact);
-        btnDel.clicked.connect(self.delContact);
+        btnAdd.clicked.connect(self.addContact)
+        btnUpd.clicked.connect(self.editContact)
+        btnDel.clicked.connect(self.delContact)
 
         # ajout des boutons dans le layout
         btnLayout.addWidget(btnAdd)
@@ -178,7 +178,6 @@ class MainWindow(QMainWindow):
         # self.table.setColumnWidth(3,200)
         # self.table.setColumnWidth(4,200)
         # self.table.setColumnWidth(5,200)
-
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
@@ -188,16 +187,14 @@ class MainWindow(QMainWindow):
         for contact in self.displayedContacts:
             self.table.insertRow(i)
 
-            self.table.setItem(i, 0, QTableWidgetItem(contact.firstname))
-            self.table.setItem(i, 1, QTableWidgetItem(contact.lastname))
-            self.table.setItem(i, 2, QTableWidgetItem(formatTelNumberDisplay(contact.number)))
-            self.table.setItem(i, 3, QTableWidgetItem(str(contact.departement)))
-            self.table.setItem(i, 4, QTableWidgetItem(contact.email))
+            self.table.setItem(i,0,QTableWidgetItem(contact.firstname))
+            self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
+            self.table.setItem(i,2,QTableWidgetItem(formatTelNumberDisplay(contact.number)))
+            self.table.setItem(i,3,QTableWidgetItem(str(contact.departement)))
+            self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             if (contact.isFavorite == True):
-                widget = QTableWidgetItem("✔")
-                widget.setTextAlignment(QtCore.Qt.AlignCenter)
-                self.table.setItem(i, 5, widget)
+                self.table.setItem(i,5,QTableWidgetItem("✔"))
             else:
                 self.table.setItem(i, 5, QTableWidgetItem(""))
             i += 1

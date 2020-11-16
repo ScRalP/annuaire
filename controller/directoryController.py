@@ -54,9 +54,14 @@ class directoryController():
     def filteredContacts(self, stringToSearch):
         if (stringToSearch==""):
             return self.directory.getContacts()
-        else :
+        else:
+            lower_stringToSearch = stringToSearch.lower()
             contactListToDisplay = []
             for contact in self.directory.getContacts():
-                if (contact.searchByString(stringToSearch)):
+                if (lower_stringToSearch in str(contact.firstname).lower() or
+                    lower_stringToSearch in str(contact.lastname).lower() or
+                    lower_stringToSearch in str(contact.number).lower() or
+                    lower_stringToSearch in str(contact.departement).lower() or
+                    lower_stringToSearch in str(contact.email).lower()):
                     contactListToDisplay.append(contact)
             return contactListToDisplay

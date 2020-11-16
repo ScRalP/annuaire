@@ -3,6 +3,7 @@
     "Quit" : "Haa",
     "Load" : "Ho-hou",
     "Save" : "Hi-hou",
+    "SaveAs" : "Hi-hou ha",
     "Add" : "Ha-hou-ha",
     "Edit" : "Hu-hoo",
     "Delete" : "Hoo-hu",
@@ -14,12 +15,9 @@
     "Number": "Hoo-hah",
     "Departement": "Ho",
     "Email": "Hou-hou",
+    "IsFavorite": "Ho-ho",
     "AddContact":"Hu",
     "EditContact":"Ha",
     "Ok":"Hok",
-    "Cancel":"Pok",
-    "Languages":"Hoko-ho",
-    "French":"Ouh",
-    "English":"Oah",
-    "Monkey":"Hogo ko-ho haa"
+    "Cancel":"Pok"
 }
