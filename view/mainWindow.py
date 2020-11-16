@@ -69,11 +69,11 @@ class MainWindow(QMainWindow):
         delMenu.triggered.connect(self.delContact)
 
         # Actions de langue
-        frMenu = QAction("&" + self.translation['French'], self)
+        frMenu = QAction("&Francais", self)
         # frMenu.triggered.connect(self.reOpen(self.translation['French']))
-        enMenu = QAction("&" + self.translation['English'], self)
+        enMenu = QAction("&Anglais", self)
         # enMenu.triggered.connect(self.reOpen(self.translation['English']))
-        monkeyMenu = QAction("&" + self.translation['Monkey'], self)
+        monkeyMenu = QAction("&Hooka-ho-hou", self)
         # monkeyMenu.triggered.connect(self.reOpen(self.translation['Monkey']))
 
         #Ajout du menu
