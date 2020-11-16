@@ -12,15 +12,22 @@ class EditContactForm(ContactForm):
         self.numeroInput.setText(contact.number)
         self.departementInput.setText(str(contact.departement))
         self.emailInput.setText(contact.email)
+        if contact.isFavorite == False:
+            self.isFavoriteInput.setCheckState(QtCore.Qt.Unchecked)
+        else :
+            self.isFavoriteInput.setCheckState(QtCore.Qt.Checked)
 
     def handleOk(self):
 
-        self.contactController.editContact(self.contact,
+        isFavoriteBool = False if self.isFavoriteInput.checkState() == QtCore.Qt.Unchecked else True
+        self.contactController.editContact(
+        self.contact,
         self.firstnameInput.text(),
         self.lastnameInput.text(),
         self.numeroInput.text(),
         self.departementInput.text(),
-        self.emailInput.text())
+        self.emailInput.text(),
+        isFavoriteBool)
 
         self.mainWindow.updateTable()
         

@@ -143,19 +143,21 @@ class MainWindow(QMainWindow):
         directory = self.directoryController.getDirectory()
         #On vide la table
         self.table.setRowCount(0)
-        self.table.setColumnCount(5)
+        self.table.setColumnCount(6)
         self.table.setHorizontalHeaderLabels([
             self.translation['Firstname'],
             self.translation['Lastname'],
             self.translation['Number'],
             self.translation['Departement'],
-            self.translation['Email']
+            self.translation['Email'],
+            self.translation['IsFavorite']
             ])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeToContents)
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
@@ -169,8 +171,12 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
             self.table.setItem(i,2,QTableWidgetItem(formatTelNumberDisplay(contact.number)))
             self.table.setItem(i,3,QTableWidgetItem(str(contact.departement)))
-            self.table.setItem(i,4,QTableWidgetItem(contact.email))
+            self.table.setItem(i,4,QTableWidgetItem(contact.email))            
 
+            if (contact.isFavorite == True):
+                self.table.setItem(i,5,QTableWidgetItem("✔"))
+            else:
+                self.table.setItem(i,5,QTableWidgetItem(""))
             i+=1
 
     def loadJSON(self):
@@ -189,13 +195,14 @@ class MainWindow(QMainWindow):
         self.dialog.show()
 
     def editContact(self):
-        self.dialog = EditContactForm(self.translation, self.directoryController,self.contactController, self.translation['EditContact'], self, self.displayedContacts[self.table.selectedIndexes()[0].row()])
-        self.dialog.show()
+        if (len(self.table.selectedIndexes()) > 0):
+            self.dialog = EditContactForm(self.translation, self.directoryController,self.contactController, self.translation['EditContact'], self, self.displayedContacts[self.table.selectedIndexes()[0].row()])
+            self.dialog.show()
 
     def delContact(self):
         if len(self.table.selectedIndexes()) > 0:
             self.directoryController.removeContact(self.displayedContacts[self.table.selectedIndexes()[0].row()])
-        self.updateTable()
+            self.updateTable()
 
     def updateFilter(self, stringFilter):
         self.updateTable(stringFilter)
