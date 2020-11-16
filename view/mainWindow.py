@@ -24,9 +24,6 @@ class MainWindow(QMainWindow):
 
         # Init de la fenetre
         self.setGeometry(500, 200, 800, 800)
-        # empecher le resize
-        # self.setFixedSize(self.size())
-        # self.statusBar().setSizeGripEnabled(False)
 
         self.setLanguage(language)
 
@@ -114,10 +111,6 @@ class MainWindow(QMainWindow):
         self.table.setSelectionBehavior(QTableView.SelectRows)
         self.table.setSelectionMode(QTableView.SingleSelection)
 
-        # #Ajout d'une ligne
-        # self.table.insertRow(0)
-        # self.table.setItem(0,0,QTableWidgetItem("yes"))
-
         mainLayout.addWidget(self.table)
 
         # --- Creation du Layout des boutons ---#
@@ -170,12 +163,10 @@ class MainWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Interactive)
         self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.Stretch)
 
-        # self.table.setColumnWidth(0,200)
-        # self.table.setColumnWidth(1,200)
-        # self.table.setColumnWidth(2,200)
-        # self.table.setColumnWidth(3,200)
-        # self.table.setColumnWidth(4,200)
-        # self.table.setColumnWidth(5,200)
+        self.table.setColumnWidth(0,120)
+        self.table.setColumnWidth(1,160)
+        self.table.setColumnWidth(2,80)
+        self.table.setColumnWidth(4,270)
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
