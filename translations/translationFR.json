@@ -17,5 +17,9 @@
     "AddContact":"Ajouter un contact",
     "EditContact":"Modifier un contact",
     "Ok":"Ok",
-    "Cancel":"Annuler"
+    "Cancel":"Annuler",
+    "Languages":"Langues",
+    "French":"Français",
+    "English":"Anglais",
+    "Monkey":"Singe"
 }

@@ -68,6 +68,14 @@ class MainWindow(QMainWindow):
         delMenu.setShortcut("Ctrl+D")
         delMenu.triggered.connect(self.delContact)
 
+        #Actions de langue
+        frMenu = QAction("&"+self.translation['French'], self)
+        #frMenu.triggered.connect(self.reopen(self.translation['French']))
+        enMenu = QAction("&"+self.translation['English'], self)
+        #enMenu.triggered.connect(self.reopen(self.translation['English']))
+        monkeyMenu = QAction("&"+self.translation['Monkey'], self)
+        #monkeyMenu.triggered.connect(self.reopen(self.translation['Monkey']))
+
         #Ajout du menu
         self.statusBar()
         menu = self.menuBar()
@@ -80,6 +88,10 @@ class MainWindow(QMainWindow):
         actionMenu.addAction(addMenu)
         actionMenu.addAction(updMenu)
         actionMenu.addAction(delMenu)
+        languageMenu = menu.addMenu("&"+self.translation['Languages'])
+        languageMenu.addAction(frMenu)
+        languageMenu.addAction(enMenu)
+        languageMenu.addAction(monkeyMenu)
 
     #Initialise la fenetre avec les composants
     def initUi(self):
