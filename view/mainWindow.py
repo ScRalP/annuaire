@@ -6,6 +6,10 @@ from Tools import SaveFileName
 
 import json
 
+from PyQt5 import *
+from pathlib import Path
+
+
 class MainWindow(QMainWindow):
     def __init__(self, language):
         super(MainWindow, self).__init__()
@@ -48,6 +52,9 @@ class MainWindow(QMainWindow):
         saveMenu.setShortcut("Ctrl+S")
         saveMenu.triggered.connect(lambda: self.directoryController.saveToJson(SaveFileName))
 
+        saveAsMenu = QAction("&"+self.translation['SaveAs'], self)
+        saveAsMenu.triggered.connect(self.saveAs)
+
         #Actions du actionMenu
         addMenu = QAction("&"+self.translation['Add'], self)
         addMenu.setShortcut("Ctrl+N")
@@ -68,6 +75,7 @@ class MainWindow(QMainWindow):
         fileMenu.addAction(exitMenu)
         fileMenu.addAction(loadMenu)
         fileMenu.addAction(saveMenu)
+        fileMenu.addAction(saveAsMenu)
         actionMenu = menu.addMenu("&"+self.translation['Action'])
         actionMenu.addAction(addMenu)
         actionMenu.addAction(updMenu)
@@ -164,6 +172,11 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             i+=1
+
+    def saveAs(self):
+        name = QFileDialog.getSaveFileName(self,self.translation['SaveAs'], "", "JSON (*.json)")
+        if not (name[0] == None or name[0] == ""):
+            self.directoryController.saveToJson(Path(name[0]))
 
     def addContact(self):
         self.dialog = AddContactForm(self.translation, self.directoryController,self.contactController, self.translation['AddContact'], self)

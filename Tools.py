@@ -12,4 +12,4 @@ def formatTelNumberDisplay(number):
             index += 1
         return formated
 
-SaveFileName = "contacts"
+SaveFileName = "contacts.json"

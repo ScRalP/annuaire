@@ -17,12 +17,12 @@ class directoryController():
         return self.window
 
     def saveToJson(self, fileName):
-        file = open(fileName+".json", "a")
+        file = open(fileName, "w")
         file.write(json.dumps(self.directory.getContacts(), default=lambda x: x.__dict__))
         file.close()
 
     def loadJSON(self, fileName):
-        file = open(fileName+".json", "r")
+        file = open(fileName, "r")
         for contact in json.loads(file.read()):
             self.addContact(self.contactController.createContact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
         file.close()
