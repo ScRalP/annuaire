@@ -15,6 +15,7 @@
     "Number": "Number",
     "Departement": "Departement",
     "Email": "Email",
+    "IsFavorite": "Favorite",
     "AddContact":"Add a contact",
     "EditContact":"Edit a contact",
     "Ok":"Ok",
