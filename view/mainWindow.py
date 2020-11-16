@@ -174,7 +174,8 @@ class MainWindow(QMainWindow):
         self.dialog.show()
 
     def delContact(self):
-        self.directoryController.removeContact(self.displayedContacts[self.table.selectedIndexes()[0].row()])
+        if len(self.table.selectedIndexes()) > 0:
+            self.directoryController.removeContact(self.displayedContacts[self.table.selectedIndexes()[0].row()])
         self.updateTable()
 
     def updateFilter(self, stringFilter):
