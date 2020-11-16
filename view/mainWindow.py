@@ -70,11 +70,11 @@ class MainWindow(QMainWindow):
 
         # Actions de langue
         frMenu = QAction("&Francais", self)
-        # frMenu.triggered.connect(self.reOpen(self.translation['French']))
+        frMenu.triggered.connect(self.reOpen("FR"))
         enMenu = QAction("&Anglais", self)
-        # enMenu.triggered.connect(self.reOpen(self.translation['English']))
+        enMenu.triggered.connect(self.reOpen("EN"))
         monkeyMenu = QAction("&Hooka-ho-hou", self)
-        # monkeyMenu.triggered.connect(self.reOpen(self.translation['Monkey']))
+        monkeyMenu.triggered.connect(self.reOpen("MONKEY"))
 
         #Ajout du menu
         self.statusBar()
@@ -229,3 +229,8 @@ class MainWindow(QMainWindow):
 
     def updateFilter(self, stringFilter):
         self.updateTable(stringFilter)
+
+    def reOpen(self, langue="en"):
+        newWindow = MainWindow(langue)
+        newWindow.directoryController = self.directoryController
+        self.close()
