@@ -11,3 +11,5 @@ def formatTelNumberDisplay(number):
             formated += " "+str(number[index]) if (index%2 == 0 and index != 0) else str(number[index])
             index += 1
         return formated
+
+SaveFileName = "contacts"

@@ -1,6 +1,8 @@
 from view.addContactForm import *
 from controller import directoryController,contactController
 from Tools import formatTelNumberDisplay
+from Tools import SaveFileName
+
 import json
 
 class MainWindow(QMainWindow):
@@ -36,11 +38,11 @@ class MainWindow(QMainWindow):
 
         loadMenu = QAction("&"+self.translation['Load'], self)
         loadMenu.setShortcut("Ctrl+O")
-        loadMenu.triggered.connect(self.directoryController.loadJSON)
+        loadMenu.triggered.connect(lambda: self.directoryController.loadJSON(SaveFileName))
 
         saveMenu = QAction("&"+self.translation['Save'], self)
         saveMenu.setShortcut("Ctrl+S")
-        saveMenu.triggered.connect(self.directoryController.saveToJson)
+        saveMenu.triggered.connect(lambda: self.directoryController.saveToJson(SaveFileName))
 
         #Actions du actionMenu
         addMenu = QAction("&"+self.translation['Add'], self)

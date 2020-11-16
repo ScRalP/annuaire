@@ -7,7 +7,7 @@ class directoryController():
     def __init__(self):
         self.directory = Directory()
         self.contactController = contactController()
-        self.loadJSON()
+        self.loadJSON("contacts")
 
     def getDirectory(self):
         return self.directory
@@ -15,13 +15,13 @@ class directoryController():
     def getWindow(self):
         return self.window
 
-    def saveToJson(self):
-        file = open("export.json", "a")
+    def saveToJson(self, fileName):
+        file = open(fileName+".json", "a")
         file.write(json.dumps(self.directory.getContacts(), default=lambda x: x.__dict__))
         file.close()
 
-    def loadJSON(self):
-        file = open("contacts.json", "r")
+    def loadJSON(self, fileName):
+        file = open(fileName+".json", "r")
         for contact in json.loads(file.read()):
             self.addContact(self.contactController.createContact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
         file.close()
