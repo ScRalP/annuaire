@@ -20,5 +20,6 @@
     "EditContact":"Edit a contact",
     "Ok":"Ok",
     "Cancel":"Cancel",
-    "Languages": "Languages"
+    "Languages": "Languages",
+    "NumIsTaken": "This number is already registered"
 }

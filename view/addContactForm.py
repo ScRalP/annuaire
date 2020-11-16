@@ -8,13 +8,14 @@ class AddContactForm(ContactForm):
 
 
         isFavoriteBool = False if self.isFavoriteInput.checkState() == QtCore.Qt.Unchecked else True
-        self.directoryController.addContact(self.contactController.createContact(
-        self.firstnameInput.text(),
-        self.lastnameInput.text(),
-        self.numeroInput.text(),
-        self.departementInput.text(),
-        self.emailInput.text(),
-        isFavoriteBool))
+        if self.directoryController.addContact(self.contactController.createContact(
+            self.firstnameInput.text(),
+            self.lastnameInput.text(),
+            self.numeroInput.text(),
+            self.departementInput.text(),
+            self.emailInput.text(),
+            isFavoriteBool)) == False:
+            self.Alert(self.translation["NumIsTaken"],self.translation["NumIsTaken"])
 
         self.mainWindow.updateTable()
         

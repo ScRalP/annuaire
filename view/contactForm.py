@@ -50,6 +50,7 @@ class ContactForm(QMainWindow):
 
         #Creation des boutons
         btnValidate = QPushButton(self.translation["Ok"])
+        btnValidate.setShortcut("Return")
         btnCancel = QPushButton(self.translation["Cancel"])
 
         #ajout des evenements
@@ -66,3 +67,8 @@ class ContactForm(QMainWindow):
         window.setLayout(mainLayout)
         self.setCentralWidget(window)
 
+    def Alert(self, title, text):
+            Alert = QMessageBox()
+            Alert.setWindowTitle(title)
+            Alert.setText(text)
+            Alert.exec()

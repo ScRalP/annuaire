@@ -44,7 +44,14 @@ class directoryController():
                 return True
                 #Numero deja pris
             return False
-    
+
+    def editContact(self, contact, firstname, lastname, number, departement, email, isFavorite):
+        if self.isNumAlreadyTaken(number):
+            return False
+        self.contactController.editContact(contact, firstname, lastname, number, departement, email, isFavorite)
+        return True
+
+
     def getContactFromNumber(self, number):
         for contact in self.directory.getContacts():
             if(contact.number == number):

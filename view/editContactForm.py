@@ -4,8 +4,9 @@ class EditContactForm(ContactForm):
     def __init__(self, language, directoryController, contactController, title, mainwindow, contact):
         ContactForm.__init__(self,language, directoryController, contactController, title, mainwindow)
 
+        self.directoryController = directoryController
         self.contactController= contactController
-        self.contact= contact
+        self.contact = contact
         
         self.firstnameInput.setText(contact.firstname)
         self.lastnameInput.setText(contact.lastname)
@@ -20,14 +21,15 @@ class EditContactForm(ContactForm):
     def handleOk(self):
 
         isFavoriteBool = False if self.isFavoriteInput.checkState() == QtCore.Qt.Unchecked else True
-        self.contactController.editContact(
+        if self.directoryController.editContact(
         self.contact,
         self.firstnameInput.text(),
         self.lastnameInput.text(),
         self.numeroInput.text(),
         self.departementInput.text(),
         self.emailInput.text(),
-        isFavoriteBool)
+        isFavoriteBool) == False:
+            self.Alert(self.translation["NumIsTaken"],self.translation["NumIsTaken"])
 
         self.mainWindow.updateTable()
         

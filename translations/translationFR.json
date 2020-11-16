@@ -20,5 +20,6 @@
     "EditContact":"Modifier un contact",
     "Ok":"Ok",
     "Cancel":"Annuler",
-    "Languages": "Langues"
+    "Languages": "Langues",
+    "NumIsTaken": "Le num\u00e9ro est d\u00e9j\u00e0 enregistr\u00e9"
 }
