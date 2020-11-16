@@ -169,7 +169,8 @@ class MainWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
-        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
         self.table.setSortingEnabled(True)
         self.table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.table.setSelectionBehavior(QTableView.SelectRows)
@@ -183,10 +184,12 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,1,QTableWidgetItem(contact.lastname))
             self.table.setItem(i,2,QTableWidgetItem(formatTelNumberDisplay(contact.number)))
             self.table.setItem(i,3,QTableWidgetItem(str(contact.departement)))
-            self.table.setItem(i,4,QTableWidgetItem(contact.email))            
+            self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             if (contact.isFavorite == True):
-                self.table.setItem(i,5,QTableWidgetItem("✔"))
+                widget = QTableWidgetItem("✔")
+                widget.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.table.setItem(i,5,widget)
             else:
                 self.table.setItem(i,5,QTableWidgetItem(""))
             i+=1
