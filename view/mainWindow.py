@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
 
         loadMenu = QAction("&"+self.translation['Load'], self)
         loadMenu.setShortcut("Ctrl+O")
-        loadMenu.triggered.connect(lambda: self.directoryController.loadJSON(SaveFileName))
+        loadMenu.triggered.connect(lambda: self.loadJSON())
 
         saveMenu = QAction("&"+self.translation['Save'], self)
         saveMenu.setShortcut("Ctrl+S")
@@ -184,6 +184,12 @@ class MainWindow(QMainWindow):
             self.table.setItem(i,4,QTableWidgetItem(contact.email))
 
             i+=1
+
+    def loadJSON(self):
+        name = QFileDialog.getOpenFileName(self,self.translation['Load'], "", "JSON (*.json)")
+        if not (name[0] == None or name[0] == ""):
+            self.directoryController.loadJSON(Path(name[0]))
+        self.updateTable()
 
     def saveAs(self):
         name = QFileDialog.getSaveFileName(self,self.translation['SaveAs'], "", "JSON (*.json)")

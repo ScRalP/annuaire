@@ -22,6 +22,7 @@ class directoryController():
         file.close()
 
     def loadJSON(self, fileName):
+        self.directory = Directory()
         file = open(fileName, "r")
         for contact in json.loads(file.read()):
             self.addContact(self.contactController.createContact(contact['firstname'],contact['lastname'],contact['number'],contact['departement'],contact['email']))
