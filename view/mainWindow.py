@@ -17,25 +17,19 @@ class MainWindow(QMainWindow):
         # Liste à afficher
         self.displayedContacts = []
 
-        # chargement du fichier de traduction
-        file = open("translations/translation" + language.upper() + ".json", "r")
-        self.translation = json.loads(file.read())
-        file.close()
 
         # Récupération des controllers
         self.directoryController = directoryController.directoryController()
         self.contactController = contactController.contactController()
 
         # Init de la fenetre
-        self.setWindowTitle(self.translation['Title'])
         self.setGeometry(500, 200, 800, 800)
         # empecher le resize
         # self.setFixedSize(self.size())
         # self.statusBar().setSizeGripEnabled(False)
 
-        self.initMenu()
-        self.initUi()
-        self.show()
+        self.setLanguage(language)
+
 
     # Initialise la barre de menu
     def initMenu(self):
@@ -70,25 +64,29 @@ class MainWindow(QMainWindow):
 
         # Actions de langue
         frMenu = QAction("&Fran\u00e7ais", self)
-        frMenu.triggered.connect(self.reOpen("FR"))
+        frMenu.triggered.connect(lambda: self.setLanguage("FR"))
         enMenu = QAction("&Anglais", self)
-        enMenu.triggered.connect(self.reOpen("EN"))
+        enMenu.triggered.connect(lambda: self.setLanguage("EN"))
         monkeyMenu = QAction("&Hooka-ho-hou", self)
-        monkeyMenu.triggered.connect(self.reOpen("MONKEY"))
+        monkeyMenu.triggered.connect(lambda: self.setLanguage("MONKEY"))
 
         #Ajout du menu
         self.statusBar()
         menu = self.menuBar()
+        menu.clear()
         fileMenu = menu.addMenu("&" + self.translation['File'])
+        fileMenu.clear()
         fileMenu.addAction(exitMenu)
         fileMenu.addAction(loadMenu)
         fileMenu.addAction(saveMenu)
         fileMenu.addAction(saveAsMenu)
         actionMenu = menu.addMenu("&" + self.translation['Action'])
+        actionMenu.clear()
         actionMenu.addAction(addMenu)
         actionMenu.addAction(updMenu)
         actionMenu.addAction(delMenu)
         languageMenu = menu.addMenu("&" + self.translation['Languages'])
+        languageMenu.clear()
         languageMenu.addAction(frMenu)
         languageMenu.addAction(enMenu)
         languageMenu.addAction(monkeyMenu)
@@ -234,3 +232,15 @@ class MainWindow(QMainWindow):
         newWindow = MainWindow(langue)
         newWindow.directoryController = self.directoryController
         self.close()
+    
+    def setLanguage(self, language):
+        # chargement du fichier de traduction
+        file = open("translations/translation" + language.upper() + ".json", "r")
+        self.translation = json.loads(file.read())
+        file.close()
+        
+        self.setWindowTitle(self.translation['Title'])
+
+        self.initMenu()
+        self.initUi()
+        self.show()
